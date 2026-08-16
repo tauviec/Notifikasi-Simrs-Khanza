@@ -1,0 +1,52 @@
+# Salin file ini menjadi config.properties lalu isi sesuai PC ini.
+# JANGAN sebarkan config.properties yang sudah terisi password ke tempat lain
+# selain PC klien yang bersangkutan.
+
+db.host=localhost
+db.port=3306
+db.database=rscnd
+db.username=notifkhanza_ro
+db.password=
+
+# Jenis notifikasi yang dipantau PC ini, pisahkan dengan koma.
+# Contoh PC di Laboratorium: jenis.watch=lab
+# Contoh PC di Radiologi:    jenis.watch=radiologi
+# Contoh PC di Farmasi:      jenis.watch=farmasi
+# Boleh lebih dari satu:     jenis.watch=lab,radiologi
+jenis.watch=lab,radiologi,farmasi
+
+# Jeda pengecekan ke database, dalam detik.
+poll.interval.seconds=60
+
+# Khusus notifikasi Farmasi (resep_obat): unit asal resep yang mau dipantau.
+# Isi ralan saja (Rawat Jalan), ranap saja (Rawat Inap), atau gabungan ralan,ranap (default).
+# Contoh PC di Farmasi Rawat Jalan saja: farmasi.unit=ralan
+farmasi.unit=ralan,ranap
+
+# Khusus untuk resep Ralan (Rawat Jalan) di Farmasi: saring lagi per nama poliklinik asal.
+# Kosongkan untuk semua poliklinik Ralan (default). Nama harus persis sama dengan nm_poli
+# di Khanza (case-insensitive), pisah koma kalau lebih dari satu.
+# Contoh cuma mau notif dari IGD saja: farmasi.ralan.poli=IGD
+farmasi.ralan.poli=
+
+# Alarm bunyi ulang tiap berapa menit selama permintaan MASIH belum dilayani
+# (misalnya masih sama-sama "belum ada hasil" / "belum terlayani" saat dicek ulang).
+# Begitu permintaan itu sudah selesai dilayani di Khanza, otomatis berhenti diingatkan.
+# Isi 0 untuk mematikan pengulangan (alarm cuma bunyi sekali saat pertama kali muncul).
+alarm.repeat.minutes=2
+
+# Selain alarm bunyi + balloon notifikasi, jendela daftar lengkap permintaan yang belum
+# dilayani juga otomatis muncul ke layar (dipaksa naik ke depan walau sedang buka aplikasi lain).
+# Isi false kalau tidak mau jendela otomatis muncul (cukup alarm + balloon saja).
+popup.auto=true
+
+# (Opsional) File suara alarm. Sudah disertakan file bawaan "alarm.mp3" di folder ini.
+# Boleh diganti file .mp3 lain - taruh di folder ini juga lalu ganti nama filenya di sini,
+# atau isi path lengkap kalau filenya di lokasi lain (mis. C:\\Suara\\alarm-saya.mp3).
+# Kalau dikosongkan atau file tidak ditemukan, otomatis pakai beep bawaan Windows.
+alarm.sound.file=alarm.mp3
+
+# Berapa kali suara/beep diputar ULANG setiap kali alarm dibunyikan (bukan soal berapa
+# menit sekali diingatkan -- itu di alarm.repeat.minutes di atas). Isi 1 kalau cuma mau
+# sekali putar saja tanpa berulang.
+alarm.sound.repeat=3
